@@ -36,12 +36,12 @@ h1{
 
 }
 
-.card{
+.cardFace{
     height:200px;
     transition: transform 0.8s;
 }
 
-.card:hover{
+.cardFace:hover{
     transform: rotateY(180deg);
 }
 
