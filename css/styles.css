@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body{
+    background-color: blanchedalmond;
+}
+
+#options{
+    display: flex;
+    width: 100%;
+    background-color: red;
+    flex: 1 100%;
+}
+
+h1{
+    font-size: 2rem;
+    flex-grow: 2;
+}
+
+.button{
+    padding: 10px;
+    margin: 10px;
+}
+
+#gameContainer{
+    display: grid;
+    width: 80%;
+    margin: 30px 10%;
+
+}
+
+.card{
+    height:200px;
+    transition: transform 0.8s;
+}
+
+.card:hover{
+    transform: rotateY(180deg);
+}
+
+div { 
+    padding-left: 40%;
+}
