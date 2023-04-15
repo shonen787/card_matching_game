@@ -1,4 +1,4 @@
-const grid = {easy:4 ,medium:8, hard:9, reset:0};
+const grid = {easy:4 ,medium:10, hard:20, reset:0};
 const gameImages = `<img class="cardFace cardFaceFront" src="img/background.png">`;
 let timer = Number(0);
 let gameOver=false;
