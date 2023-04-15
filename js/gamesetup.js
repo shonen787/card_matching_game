@@ -314,7 +314,7 @@ async function checkMatchingcards(){
     console.log(winner.length);
     if (winner.length === (document.querySelectorAll('.card').length)){
         await new Promise(resolve => setTimeout(resolve, 500));
-        alert("Good job, retard");
+        alert("Good job, buddy!!!");
     }
 
 }
