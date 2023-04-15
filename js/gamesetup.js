@@ -7,6 +7,7 @@ const menuButtons = document.getElementById("options");
 
 menuButtons.addEventListener("click",menuCallBack);
 
+
 function menuCallBack(event){
     event.preventDefault();
     let gameLevel = event.target.id;
@@ -246,8 +247,7 @@ function initializeGameMap(gridSize){
             delete imageLocations[randomNumber];
         }else{
             i--;
-        }
-               
+        }              
     }
     {
         const tempArray = [...chosenImages];
@@ -261,13 +261,70 @@ function initializeGameMap(gridSize){
     //Add Images
     for (let i=0;i < grideSize2;i++){
         //Add div and card backs
+        const scene = document.createElement('div');
         const card = document.createElement('div');
+        scene.className = "scene scene--card";
         card.className = "card";
         card.innerHTML = gameImages;
         card.innerHTML += `<img class=cardFace cardFaceBack src="./img/${chosenImages[i]}">`;
         gameArea.appendChild(card);
     }
+
+
+    //Get all Cards and add an eventlistener to toggle the "is-flipped" css value
+
+    var cards = document.querySelectorAll('.card');
+
+    [...cards].forEach((card)=>{
+      card.addEventListener( 'click', isflipped);
+    });
+
 }
+
+function isflipped(){
+    this.classList.toggle('is-flipped');
+    checkMatchingcards();
+}
+
+async function checkMatchingcards(){
+    const cards = document.querySelectorAll('.is-flipped');
+
+    if (cards.length === Number(2)){
+        if (cards[0].lastChild.src === cards[1].lastChild.src){
+            for (let card of cards){
+             card.removeEventListener('click',isflipped);
+             card.classList.toggle('is-flipped');
+             card.classList.toggle('stays-flipped');
+            }
+        }else{
+            temporaryDisableEvents();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            for (let card of cards){
+                card.classList.toggle('is-flipped');
+            }
+            enableEvents();
+            
+        }
+    }
+    const winner = document.querySelectorAll('.stays-flipped');
+    console.log(winner.length);
+    if (winner.length === (document.querySelectorAll('.card').length)){
+        await new Promise(resolve => setTimeout(resolve, 500));
+        alert("Good job, retard");
+    }
+
+
+
+}
+
+
+
+
+function temporaryDisableEvents(){}
+function enableEvents(){}
+
+
+
 
 
 function shuffle(array) {
@@ -287,3 +344,4 @@ function shuffle(array) {
   
     return array;
   }
+

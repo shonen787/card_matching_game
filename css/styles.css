@@ -38,13 +38,45 @@ h1{
 
 .cardFace{
     height:200px;
-    transition: transform 0.8s;
+    /* transition: transform 0.8s; */
 }
 
-.cardFace:hover{
+/* .cardFace:hover{
     transform: rotateY(180deg);
-}
+} */
 
 div { 
     padding-left: 40%;
 }
+
+.scene {
+    display: inline-block;
+    margin: 40px 0;
+    perspective: 6000px;
+}
+
+.card{
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+}
+
+.card.is-flipped {
+    transform: translateX(-65%) rotateY(-180deg);
+  }
+
+  .cardFaceFront{
+    position:absolute;
+
+    backface-visibility: hidden;
+  }
+
+  .cardFaceBack{
+    transform: rotateY(180deg);
+  }
+
+  .card.stays-flipped {
+    transform: translateX(-65%) rotateY(-180deg);
+  }
