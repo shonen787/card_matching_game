@@ -267,6 +267,7 @@ function initializeGameMap(gridSize){
         card.className = "card";
         card.innerHTML = gameImages;
         card.innerHTML += `<img class=cardFace cardFaceBack src="./img/${chosenImages[i]}">`;
+        card.id=`card-${i}`; //chat-gpt
         gameArea.appendChild(card);
     }
 
@@ -291,11 +292,14 @@ async function checkMatchingcards(){
 
     if (cards.length === Number(2)){
         if (cards[0].lastChild.src === cards[1].lastChild.src){
+            temporaryDisableEvents();
+            await new Promise(resolve => setTimeout(resolve, 1000));
             for (let card of cards){
              card.removeEventListener('click',isflipped);
              card.classList.toggle('is-flipped');
              card.classList.toggle('stays-flipped');
             }
+            enableEvents();
         }else{
             temporaryDisableEvents();
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -313,15 +317,23 @@ async function checkMatchingcards(){
         alert("Good job, retard");
     }
 
-
-
 }
 
 
 
 
-function temporaryDisableEvents(){}
-function enableEvents(){}
+function temporaryDisableEvents(){
+    const cards = document.querySelectorAll('.card');
+    [...cards].forEach((card) => {
+        card.removeEventListener('click', isflipped);
+    });
+}
+function enableEvents(){
+    const cards = document.querySelectorAll('.card:not(.stays-flipped)');
+    [...cards].forEach((card) => {
+        card.addEventListener('click', isflipped);
+    });
+}
 
 
 
