@@ -314,7 +314,12 @@ async function checkMatchingcards(){
     console.log(winner.length);
     if (winner.length === (document.querySelectorAll('.card').length)){
         await new Promise(resolve => setTimeout(resolve, 500));
-        alert("Good job, buddy!!!");
+        for (let card of winner){
+            card.classList.add('box');
+        }
+        document.querySelector('.options').innerHTML = '';
+
+
     }
 
 }
