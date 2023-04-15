@@ -1,5 +1,7 @@
 const grid = {easy:4 ,medium:8, hard:9, reset:0};
 const gameImages = `<img class="cardFace cardFaceFront" src="img/background.png">`;
+let timer = Number(0);
+let gameOver=false;
 
 
 // Get the elements into an array
@@ -12,6 +14,7 @@ function menuCallBack(event){
     event.preventDefault();
     let gameLevel = event.target.id;
     initializeGameMap(grid[gameLevel]);
+    startTimer();
 }
 
 
@@ -313,6 +316,7 @@ async function checkMatchingcards(){
     const winner = document.querySelectorAll('.stays-flipped');
     console.log(winner.length);
     if (winner.length === (document.querySelectorAll('.card').length)){
+        gameOver = true;
         await new Promise(resolve => setTimeout(resolve, 500));
         for (let card of winner){
             card.classList.add('box');
@@ -324,25 +328,19 @@ async function checkMatchingcards(){
 
 }
 
-
-
-
 function temporaryDisableEvents(){
     const cards = document.querySelectorAll('.card');
     [...cards].forEach((card) => {
         card.removeEventListener('click', isflipped);
     });
 }
+
 function enableEvents(){
     const cards = document.querySelectorAll('.card:not(.stays-flipped)');
     [...cards].forEach((card) => {
         card.addEventListener('click', isflipped);
     });
 }
-
-
-
-
 
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -362,3 +360,11 @@ function shuffle(array) {
     return array;
   }
 
+async function startTimer(){
+    if (!gameOver){
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        timer = timer + Number(1);
+        document.getElementById('timer').innerHTML = timer;
+    }
+    startTimer()
+}
